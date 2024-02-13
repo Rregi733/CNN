@@ -93,7 +93,7 @@ namespace CNN.Layers
             return output;
         }
 
-        public void Backward(double[,,,] dLoss)
+        public void Backward(double[,,,] dLoss, double learningRate)
         {
             int outputDepth = numFilters;
             int outputWidth = (inputWidth - kernelSize) / stride + 1;
@@ -124,6 +124,7 @@ namespace CNN.Layers
                     }
                 }
             }
+            this.UpdateWeights(learningRate);
         }
 
         public void UpdateWeights(double learningRate)
