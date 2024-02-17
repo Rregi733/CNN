@@ -62,12 +62,12 @@ class Program
             }
         }
 
-        // Backpropagation
-        convLayer.Backward(loss);
-
+       
         // Update weights (with a chosen learning rate)
         double learningRate = 0.01;
-        convLayer.UpdateWeights(learningRate);
-        convLayer.Display();
+
+        // Backpropagation
+        convLayer.Backward(loss, learningRate);
+
     }
 }

@@ -93,7 +93,7 @@ namespace CNN.Layers
             return output;
         }
 
-        public void Backward(double[,,,] dLoss, double learningRate)
+        public void Backward(double[,,,] dLoss_dY, double learningRate)
         {
             int outputDepth = numFilters;
             int outputWidth = (inputWidth - kernelSize) / stride + 1;
@@ -115,11 +115,11 @@ namespace CNN.Layers
                                     {
                                         int inputX = i * stride + m;
                                         int inputY = j * stride + n;
-                                        gradientWeights[m, n, k, f] += input[k, inputX, inputY] * dLoss[i, j, d, f];
+                                        gradientWeights[m, n, k, f] += input[k, inputX, inputY] * dLoss_dY[i, j, d, f];
                                     }
                                 }
                             }
-                            gradientBiases[f] += dLoss[i, j, d, f];
+                            gradientBiases[f] += dLoss_dY[i, j, d, f];
                         }
                     }
                 }

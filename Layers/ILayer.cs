@@ -11,8 +11,8 @@ namespace CNN.Layers
         /*
         public double[] Forward(double[] input);
         public double[,,] Forward(double[,,] input);
-        public double[] Backward(double[] dLoss, double learningRate);
-        public double[,,] Backward(double[,,] dLoss, double learningRate);
+        public double[] Backward(double[] dLoss_dY, double learningRate);
+        public double[,,] Backward(double[,,] dLoss_dY, double learningRate);
         */
     }
 }
