@@ -31,6 +31,7 @@ namespace CNN.Layers
             this.kernelSize = kernelSize;
             this.stride = stride;
             this.numFilters = numFilters;
+            input = new double[inputDepth, inputWidth, inputHeight];
 
             // Initialize weights and biases randomly or with specific values
             Random random = new Random();

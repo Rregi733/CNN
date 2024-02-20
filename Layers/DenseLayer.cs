@@ -19,7 +19,8 @@ namespace CNN.Layers
         {
             this.inputSize = inputSize;
             this.outputSize = outputSize;
-
+            inputs = new double[inputSize];
+            outputs = new double[outputSize];
             // Initialize weights and biases randomly
             Random rand = new Random();
             weights = new double[inputSize, outputSize];
