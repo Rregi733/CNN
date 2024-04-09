@@ -1,4 +1,5 @@
 ﻿using CNN.Layers;
+using System;
 
 class Program
 {
@@ -10,7 +11,7 @@ class Program
         int inputHeight = 5;
         int kernelSize = 3;
         int stride = 1;
-        int numFilters = 2; // Number of filters (output channels)
+        int numFilters = 3; // Number of filters (output channels)
 
         ConvolutionLayer convLayer = new ConvolutionLayer(inputDepth, inputWidth, inputHeight, kernelSize, stride, numFilters);
 
@@ -40,34 +41,89 @@ class Program
             }
         };
 
-        double[,,,] output = convLayer.Forward(input);
-        convLayer.Display();
+        double[,,] output = convLayer.Forward(input);
+        
 
         // Example target output (just for demonstration)
-        double[,,,] targetOutput = new double[output.GetLength(0), output.GetLength(1), output.GetLength(2), output.GetLength(3)]; // Your target output here
-
-        // Compute loss (just for demonstration)
-        double[,,,] loss = new double[output.GetLength(0), output.GetLength(1), output.GetLength(2), output.GetLength(3)];
-        for (int f = 0; f < output.GetLength(3); f++)
+        double[,,] targetOutput = new double[output.GetLength(0), output.GetLength(1), output.GetLength(2)]; // Your target output here
+        Random random = new Random();
+        for (int d = 0; d < output.GetLength(0); d++)
         {
-            for (int d = 0; d < output.GetLength(2); d++)
+            for (int i = 0; i < output.GetLength(1); i++)
             {
-                for (int i = 0; i < output.GetLength(0); i++)
+                for (int j = 0; j < output.GetLength(2); j++)
                 {
-                    for (int j = 0; j < output.GetLength(1); j++)
-                    {
-                        loss[i, j, d, f] = output[i, j, d, f] - targetOutput[i, j, d, f]; // Simple difference for demonstration
-                    }
+                    targetOutput[d, i, j] = random.NextDouble(); // Simple difference for demonstration
                 }
             }
         }
+        double[,,] loss = new double[output.GetLength(0), output.GetLength(1), output.GetLength(2)];
 
-       
-        // Update weights (with a chosen learning rate)
-        double learningRate = 0.01;
+        for (int e = 0; e < 10; e++)
+        {
 
-        // Backpropagation
-        convLayer.Backward(loss, learningRate);
+
+            // Compute loss (just for demonstration)
+
+            for (int d = 0; d < output.GetLength(0); d++)
+            {
+                for (int i = 0; i < output.GetLength(1); i++)
+                {
+                    for (int j = 0; j < output.GetLength(2); j++)
+                    {
+                        loss[d, i, j] = output[d, i, j] - targetOutput[d, i, j]; // Simple difference for demonstration
+                    }
+                }
+            }
+
+
+            // Update weights (with a chosen learning rate)
+            double learningRate = 0.0001;
+            double momentum = 0;
+            // Backpropagation
+            double[,,] temp = convLayer.Backward(loss, learningRate, momentum);
+            output = convLayer.Forward(input);
+            
+            for (int d = 0; d < output.GetLength(0); d++)
+            {
+                for (int i = 0; i < output.GetLength(1); i++)
+                {
+                    for (int j = 0; j < output.GetLength(2); j++)
+                    {
+                        Console.Write(loss[d, i, j]);
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            
+            /*
+            for (int d = 0; d < convLayer.weights.GetLength(0); d++)
+            {
+                for (int f = 0; f < convLayer.weights.GetLength(1); f++)
+                {
+                    for (int i = 0; i < convLayer.weights.GetLength(2); i++)
+                    {
+                        for (int j = 0; j < convLayer.weights.GetLength(3); j++)
+                        {
+                            Console.Write(convLayer.weights[d, f, i, j]);
+                        }
+
+                    }
+
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+            }
+            */
+        }
 
     }
 }

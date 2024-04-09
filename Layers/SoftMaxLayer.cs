@@ -37,7 +37,7 @@ namespace CNN.Layers
             return output;
         }
 
-        public double[] Backward(double[] trueLabel, double learningRate)
+        public double[] Backward(double[] trueLabel, double learningRate, double momentum)
         {
             double[] gradient = new double[size];
 
