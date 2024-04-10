@@ -28,4 +28,4 @@ Console.WriteLine(results[0] + " "+ results[1]);
 
 simpleCNN.Train(cifarSet, 1); // train the model
 results = simpleCNN.Test(cifarSet); //recompute the accuracy
-Console.WriteLine(results[0] + " " + results[1]);
+Console.WriteLine("Top one accuracy:" + results[0] + " Top three accuray" + results[1]);
