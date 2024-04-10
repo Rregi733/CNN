@@ -32,6 +32,7 @@ namespace CNN.Model
 
         public double[] Forward(double[,,] input)
         {
+            //count the layers and their types in order to allocate space for intermediete arrays
             int volLayersCount = 0;
             int flatLayersCount = 0;
             for (int i = 0; i < this.layers.Length; i++)
@@ -44,7 +45,7 @@ namespace CNN.Model
                 {
                     flatLayersCount++;
                 }
-                else if (layers.Length == 3)
+                else if (layers[i].LayerType() == 3)
                 {
                     flatLayersCount++;
                 }
@@ -59,7 +60,8 @@ namespace CNN.Model
             interVol[v] = layers[0].Forward(input);
             v++;
 
-            for (int i = 0; i < this.layers.Length; i++)
+            // run the forward methods of each layer
+            for (int i = 1; i < this.layers.Length; i++)
             {
                 if (layers[i].LayerType() == 1)
                 {
@@ -71,7 +73,7 @@ namespace CNN.Model
                     interFlat[f] = layers[i].Forward(interFlat[f-1]);
                     f++;
                 }
-                else if (layers.Length == 3)
+                else if (layers[i].LayerType() == 3)
                 {
                     interFlat[f] = layers[i].TransfromForward(interVol[v-1]);
                     f++;
@@ -81,6 +83,7 @@ namespace CNN.Model
             return interFlat[f-1];
         }
 
+        //count the layers and their types in order to allocate space for intermediete arrays
         public void Backward(double[] trueLabel, double learningRate, double momentum)
         {
             int volLayersCount = 0;
@@ -95,7 +98,7 @@ namespace CNN.Model
                 {
                     flatLayersCount++;
                 }
-                else if (layers.Length == 3)
+                else if (layers[i].LayerType() == 3)
                 {
                     volLayersCount++;
                 }
@@ -110,6 +113,7 @@ namespace CNN.Model
             interFlat[f] = layers[this.layers.Length - 1].Backward(trueLabel, learningRate, momentum);
             f++;
 
+            // run the backward methods of each layer
             for (int i = this.layers.Length - 2; i >= 0; i--)
             {
                 if (layers[i].LayerType() == 1)
@@ -122,7 +126,7 @@ namespace CNN.Model
                     interFlat[f] = layers[i].Backward(interFlat[f - 1], learningRate, momentum);
                     f++;
                 }
-                else if (layers.Length == 3)
+                else if (layers[i].LayerType() == 3)
                 {
                     interVol[v] = layers[i].TransfromBackward(interFlat[f - 1]);
                     v++;
@@ -133,42 +137,47 @@ namespace CNN.Model
 
         public void Train(CNN.DataHandler.CifarSet cifarSet, int epoch)
         {
-
-            for (int i = 0; i < cifarSet.trainData.GetLength(0); i++)
+            //loop the dataset based on epochs
+            for (int e = 0; e < epoch; e++)
             {
-                // assign input image
-                double[,,] image = new double[3,32,32];
-                for (int c = 0; c < 3; c++)
+                //Do a forward and a backward pass for each image
+                for (int i = 0; i < 50 /*cifarSet.trainData.GetLength(0)*/; i++)
                 {
-                    for(int h = 0; h < 32; h++)
+                    // assign input image
+                    double[,,] image = new double[3, 32, 32];
+                    for (int c = 0; c < 3; c++)
                     {
-                        for (int w = 0; w < 32; w++)
+                        for (int h = 0; h < 32; h++)
                         {
-                            image[c,h,w] = cifarSet.trainData[i,c,h,w];
+                            for (int w = 0; w < 32; w++)
+                            {
+                                image[c, h, w] = cifarSet.trainData[i, c, h, w];
+                            }
                         }
                     }
-                }
 
-                //Forward pass
-                double[] output = this.Forward(image);
+                    //Forward pass
+                    double[] output = this.Forward(image);
 
-                //Onehot encoding true label
-                double[] trueLabel = new double[output.Length];
-                for (int j = 0; j > output.Length; j++)
-                {
-                    if (cifarSet.trainDataLabel[i,1] == j)
+                    //Onehot encoding true label
+                    double[] trueLabel = new double[output.Length];
+                    for (int j = 0; j > output.Length; j++)
                     {
-                        trueLabel[j] = 1;
+                        if (cifarSet.trainDataLabel[i, 1] == j)
+                        {
+                            trueLabel[j] = 1;
+                        }
+                        else
+                        {
+                            trueLabel[j] = 0;
+                        }
                     }
-                    else 
-                    {
-                        trueLabel[j] = 0;
-                    }
-                }
 
-                //Backward pass
-                this.Backward(trueLabel, learningRate, momentum);
+                    //Backward pass
+                    this.Backward(trueLabel, learningRate, momentum);
+                }
             }
+            
         }
 
         //Function to find top elements in an array, used in testing phase
@@ -209,7 +218,8 @@ namespace CNN.Model
             int topThreeHit = 0;
             int testSetSize = cifarSet.testDataLabel.GetLength(0);
 
-            for (int i = 0;i < testSetSize;i++)
+            //run the tests for each image in the test set
+            for (int i = 0;i < 100 /*testSetSize*/;i++)
             {
                 // assign input image
                 double[,,] image = new double[3, 32, 32];

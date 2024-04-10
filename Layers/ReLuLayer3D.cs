@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CNN.Layers
 {
+    [Serializable]
     public class ReLuLayer3D : ILayer
     {
         double[,,] input;

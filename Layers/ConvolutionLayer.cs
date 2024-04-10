@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CNN.Layers
 {
+    [Serializable]
     public class ConvolutionLayer : ILayer
     {
         

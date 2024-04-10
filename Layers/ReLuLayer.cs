@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CNN.Layers
 {
+    [Serializable]
     public class ReLuLayer : ILayer
     {
         double[] input;
@@ -18,6 +19,7 @@ namespace CNN.Layers
             output = new double[size];
         }
 
+        //pass positive inputs and make others zero
         public double[] Forward(double[] input)
         {
             this.input = input;
@@ -37,11 +39,12 @@ namespace CNN.Layers
             return output;
         }
 
+        //Pass gradients of the inputs that ware positive
         public double[] Backward(double[] dLoss_dY, double learningRate, double momentum)
         {
             double[] gradient = new double[size];
 
-            for (int i = 0; i <= size; i++)
+            for (int i = 0; i < size; i++)
             {
                 if ((input[i] > 0))
                 {

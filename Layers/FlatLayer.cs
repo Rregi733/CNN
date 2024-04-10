@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CNN.Layers
 {
+    [Serializable]
     public class FlatLayer : ILayer
     {
         double[,,] input;
@@ -22,6 +23,7 @@ namespace CNN.Layers
             this.output = new double[x*y*z];
         }
         
+        //flaten the 3d array into 1d
         public double[] TransfromForward(double[,,] input)
         {
             this.input = input;
@@ -41,6 +43,7 @@ namespace CNN.Layers
             return output;
         }
 
+        //reconstruct the 3d array from 1d
         public double[,,] TransfromBackward(double[] dLoss_dY)
         {
             double[,,] gradient = new double[z,x,y];

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CNN.Layers
 {
+    [Serializable]
     public class DenseLayer : ILayer
     {
         private int inputSize;

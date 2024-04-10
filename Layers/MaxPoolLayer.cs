@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CNN.Layers
 {
+    [Serializable]
     public class MaxPoolLayer : ILayer
     {
         //parameters of the input
@@ -30,8 +31,8 @@ namespace CNN.Layers
 
             input = new double[inputDepth, inputWidth, inputHeight];
 
-            outputWidth = inputWidth - poolWidth + 1;
-            outputHeight = inputHeight - poolHeight + 1;
+            outputWidth = inputWidth / poolWidth;
+            outputHeight = inputHeight / poolHeight;
 
             output = new double[inputDepth, outputWidth, outputHeight];
 
@@ -53,6 +54,7 @@ namespace CNN.Layers
         {
             this.input= input;
 
+            //initialize mask with 0
             for (int k = 0; k < inputDepth; k++)
             {
                 for (int i = 0; i < inputWidth; i++)
@@ -79,6 +81,7 @@ namespace CNN.Layers
                                 int inputX = i * poolWidth + m;
                                 int inputY = j * poolHeight + n;
 
+                                // assign the first element as max
                                 if(m == 0 && n == 0)
                                 {
                                     maxValue = input[k, inputX, inputY];
@@ -104,13 +107,31 @@ namespace CNN.Layers
         {
             double[,,] inputGradient = new double[inputDepth, inputWidth, inputHeight];
 
-            for(int k = 0; k < inputDepth; k++ )
+            for(int k = 0; k < dLoss_dY.GetLength(0); k++ )
             {
-                for(int i = 0; i < inputWidth; i++)
+                for(int i = 0; i < dLoss_dY.GetLength(1); i++)
                 {
-                    for(int j = 0; j  < inputHeight; j++)
+                    for(int j = 0; j  < dLoss_dY.GetLength(2); j++)
                     {
-                        inputGradient[k, i, j] = dLoss_dY[k, i, j] * maxMask[k, i, j];
+                        for(int w = 0; w < poolWidth; w++)
+                        {
+                            for (int h = 0; h < poolHeight; h++)
+                            {
+                                //pass the gradient to elements that had maxvalue in previos layer
+                                int inputX = poolWidth * i + w;
+                                int inputY = poolHeight * j + h;
+                                if (maxMask[k, inputX, inputY] == 1)
+                                {
+                                    inputGradient[k, inputX, inputY ] = dLoss_dY[k, i, j];
+                                }
+                                
+                                else
+                                {
+                                    inputGradient[k, inputX, inputY] = 0;
+                                }
+                            }
+                        }
+                            
                     }
                 }
             }

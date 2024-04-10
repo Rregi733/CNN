@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CNN.Layers
 {
+    [Serializable]
     public class SoftMaxLayer : ILayer
     {
         double[] input;
@@ -37,11 +38,12 @@ namespace CNN.Layers
             return output;
         }
 
+        //loss wrt to input when using categorial cross entropy and softmax activation function
         public double[] Backward(double[] trueLabel, double learningRate, double momentum)
         {
             double[] gradient = new double[size];
 
-            for (int i = 0; i <= size; i++)
+            for (int i = 0; i < size; i++)
             {
                 gradient[i] = output[i] - trueLabel[i];
             }
