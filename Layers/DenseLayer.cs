@@ -140,5 +140,30 @@ namespace CNN.Layers
                 gradientBiases[i] = 0;
             }
         }
+
+        int ILayer.LayerType()
+        {
+            return 2;
+        }
+
+        double[,,] ILayer.Forward(double[,,] input)
+        {
+            throw new NotImplementedException();
+        }
+
+        double[,,] ILayer.Backward(double[,,] dLoss_dY, double learningRate, double momentum)
+        {
+            throw new NotImplementedException();
+        }
+
+        double[] ILayer.TransfromForward(double[,,] input)
+        {
+            throw new NotImplementedException();
+        }
+
+        double[,,] ILayer.TransfromBackward(double[] dLoss_dY)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

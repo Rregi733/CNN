@@ -22,7 +22,7 @@ namespace CNN.Layers
             this.output = new double[x*y*z];
         }
         
-        public double[] Forward(double[,,] input)
+        public double[] TransfromForward(double[,,] input)
         {
             this.input = input;
             int i = 0;
@@ -41,7 +41,7 @@ namespace CNN.Layers
             return output;
         }
 
-        public double[,,] Backward(double[] dLoss_dY, double learningRate, double momentum)
+        public double[,,] TransfromBackward(double[] dLoss_dY)
         {
             double[,,] gradient = new double[z,x,y];
             int i = 0;
@@ -57,6 +57,31 @@ namespace CNN.Layers
                 }
             }
             return gradient;
+        }
+
+        int ILayer.LayerType()
+        {
+            return 3;
+        }
+
+        double[] ILayer.Forward(double[] input)
+        {
+            throw new NotImplementedException();
+        }
+
+        double[,,] ILayer.Forward(double[,,] input)
+        {
+            throw new NotImplementedException();
+        }
+
+        double[] ILayer.Backward(double[] dLoss_dY, double learningRate, double momentum)
+        {
+            throw new NotImplementedException();
+        }
+
+        double[,,] ILayer.Backward(double[,,] dLoss_dY, double learningRate, double momentum)
+        {
+            throw new NotImplementedException();
         }
     }
 }

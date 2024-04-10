@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CNN.Layers", "Layers\CNN.Layers.csproj", "{F56ACB5A-BB39-4AD2-BA00-A60EC23E7DA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNN.DataHandler", "CNN.DataHandler\CNN.DataHandler.csproj", "{81D4C688-0F20-4038-A371-BA085DD296C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CNN.DataHandler", "CNN.DataHandler\CNN.DataHandler.csproj", "{81D4C688-0F20-4038-A371-BA085DD296C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNN.Model", "CNN.Model\CNN.Model.csproj", "{3C2F0C5E-1741-4696-BA20-2346687965D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{81D4C688-0F20-4038-A371-BA085DD296C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81D4C688-0F20-4038-A371-BA085DD296C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81D4C688-0F20-4038-A371-BA085DD296C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2F0C5E-1741-4696-BA20-2346687965D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2F0C5E-1741-4696-BA20-2346687965D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2F0C5E-1741-4696-BA20-2346687965D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2F0C5E-1741-4696-BA20-2346687965D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

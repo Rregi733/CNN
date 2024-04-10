@@ -10,6 +10,7 @@ namespace CNN.Layers
 {
     public class ConvolutionLayer : ILayer
     {
+        
         //parameters of the input
         private int inputDepth;
         private int inputWidth;
@@ -229,6 +230,31 @@ namespace CNN.Layers
                 // Reset gradient
                 gradientBiases[f] = 0;
             }
+        }
+        int ILayer.LayerType()
+        {
+            return 1;
+        }
+
+        double[] ILayer.Forward(double[] input)
+        {
+            throw new NotImplementedException();
+        }
+
+        double[] ILayer.Backward(double[] dLoss_dY, double learningRate, double momentum)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        double[] ILayer.TransfromForward(double[,,] input)
+        {
+            throw new NotImplementedException();
+        }
+
+        double[,,] ILayer.TransfromBackward(double[] dLoss_dY)
+        {
+            throw new NotImplementedException();
         }
     }
 }
