@@ -141,7 +141,7 @@ namespace CNN.Model
             for (int e = 0; e < epoch; e++)
             {
                 //Do a forward and a backward pass for each image
-                for (int i = 0; i < 50 /*cifarSet.trainData.GetLength(0)*/; i++)
+                for (int i = 0; i < 5000 /*cifarSet.trainData.GetLength(0)*/; i++)
                 {
                     // assign input image
                     double[,,] image = new double[3, 32, 32];
@@ -161,9 +161,9 @@ namespace CNN.Model
 
                     //Onehot encoding true label
                     double[] trueLabel = new double[output.Length];
-                    for (int j = 0; j > output.Length; j++)
+                    for (int j = 0; j < output.Length; j++)
                     {
-                        if (cifarSet.trainDataLabel[i, 1] == j)
+                        if (cifarSet.trainDataLabel[i, 0] == j) //0 - coarse label 1 - fine label
                         {
                             trueLabel[j] = 1;
                         }
@@ -175,6 +175,7 @@ namespace CNN.Model
 
                     //Backward pass
                     this.Backward(trueLabel, learningRate, momentum);
+                    Console.WriteLine(i);
                 }
             }
             
@@ -219,7 +220,7 @@ namespace CNN.Model
             int testSetSize = cifarSet.testDataLabel.GetLength(0);
 
             //run the tests for each image in the test set
-            for (int i = 0;i < 100 /*testSetSize*/;i++)
+            for (int i = 0;i < 200 /*testSetSize*/;i++)
             {
                 // assign input image
                 double[,,] image = new double[3, 32, 32];
@@ -239,12 +240,12 @@ namespace CNN.Model
 
                 // compare the predictions against the test label for the image
                 int maxIndex = FindIndexOfMax(output);
-                if (maxIndex == cifarSet.trainDataLabel[i, 1]) { topOneHit++; }
+                if (maxIndex == cifarSet.trainDataLabel[i, 0]) { topOneHit++; } //0 - coarse label 1 - fine label
 
                 int[] maxThreeIndices = FindIndicesOfMaxThree(output);
                 for(int m = 0; m < 3; m++)
                 {
-                    if (maxThreeIndices[m] == cifarSet.trainDataLabel[i, 1]) { topThreeHit++; }
+                    if (maxThreeIndices[m] == cifarSet.trainDataLabel[i, 0]) { topThreeHit++; } //0 - coarse label 1 - fine label
                 }
             }
 

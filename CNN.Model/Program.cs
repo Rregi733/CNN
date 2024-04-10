@@ -6,7 +6,7 @@ using CNN.Model;
 CifarSet cifarSet = new CifarSet("C:\\cifar-100-binary");
 
 //simple model for testing
-Model simpleCNN = new Model(13, 0.2, 0);
+Model simpleCNN = new Model(13, 0.00000001, 0.01);
 simpleCNN.AddLayer(new ConvolutionLayer(3, 32, 32, 3, 1, 10));
 simpleCNN.AddLayer(new ReLuLayer3D(10, 30, 30));
 simpleCNN.AddLayer(new MaxPoolLayer(10, 30, 30, 2, 2));
@@ -18,8 +18,8 @@ simpleCNN.AddLayer(new DenseLayer(720, 720));
 simpleCNN.AddLayer(new ReLuLayer(720));
 simpleCNN.AddLayer(new DenseLayer(720, 360));
 simpleCNN.AddLayer(new ReLuLayer(360));
-simpleCNN.AddLayer(new DenseLayer(360, 100));
-simpleCNN.AddLayer(new SoftMaxLayer(100));
+simpleCNN.AddLayer(new DenseLayer(360, 20));
+simpleCNN.AddLayer(new SoftMaxLayer(20));
 
 //accuracy prior to training
 double[] results = new double[2];
