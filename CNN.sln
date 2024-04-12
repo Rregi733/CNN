@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CNN.DataHandler", "CNN.Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CNN.Model", "CNN.Model\CNN.Model.csproj", "{3C2F0C5E-1741-4696-BA20-2346687965D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNN.EndUser", "CNN.EndUser\CNN.EndUser.csproj", "{5B933842-C401-4ABA-99F3-2A7507E2C25A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CNN.EndUser", "CNN.EndUser\CNN.EndUser.csproj", "{5B933842-C401-4ABA-99F3-2A7507E2C25A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNN.UnitTests", "CNN.UnitTests\CNN.UnitTests.csproj", "{4E436051-9307-48F2-AFE7-BF2B6CED57DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5B933842-C401-4ABA-99F3-2A7507E2C25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B933842-C401-4ABA-99F3-2A7507E2C25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B933842-C401-4ABA-99F3-2A7507E2C25A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E436051-9307-48F2-AFE7-BF2B6CED57DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E436051-9307-48F2-AFE7-BF2B6CED57DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E436051-9307-48F2-AFE7-BF2B6CED57DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E436051-9307-48F2-AFE7-BF2B6CED57DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
