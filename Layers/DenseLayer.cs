@@ -43,13 +43,13 @@ namespace CNN.Layers
             {
                 for (int j = 0; j < outputSize; j++)
                 {
-                    weights[i, j] = rand.NextDouble() * 0.1 - 0.05; // Random weights between -0.05 and 0.05
+                    weights[i, j] = rand.NextDouble() * 0.1 ; // Random weights between 0 and 0.1
                 }
             }
 
             for (int i = 0; i < outputSize; i++)
             {
-                biases[i] = rand.NextDouble() * 0.1 - 0.05; // Random biases between -0.05 and 0.05
+                biases[i] = rand.NextDouble() * 0.1 ; // Random biases between 0 and 0.1
             }
 
             for (int i = 0; i < outputSize; i++)

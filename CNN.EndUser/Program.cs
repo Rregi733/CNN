@@ -19,7 +19,10 @@ DataSerializer dataSerializer = new DataSerializer();
 //array to hold information about saved models
 string[,] models =
 {
-    {"simple_model_1", "13", "0.0001","0.01" }
+    {"simple_model_1", "13", "0.0001","0.01" },
+    {"simple_model_2", "13", "0.0001","0.00" },
+    {"simple_model_3", "13", "0.0002","0.01" },
+    {"simple_model_4", "13", "0.0002","0.00" }
 };
 
 //selecting the main tab of the program

@@ -137,11 +137,9 @@ namespace CNN.Model
 
         public void Train(CNN.DataHandler.CifarSet cifarSet, int epoch)
         {
-            //loop the dataset based on epochs
-            for (int e = 0; e < epoch; e++)
-            {
-                //Do a forward and a backward pass for each image
-                for (int i = 0; i < 20000 /*cifarSet.trainData.GetLength(0)*/; i++)
+            
+                //Do a forward and a backward pass for each image, for the number of epochs
+                for (int i = 0; i < epoch; i++)
                 {
                     // assign input image
                     double[,,] image = new double[3, 32, 32];
@@ -177,7 +175,7 @@ namespace CNN.Model
                     this.Backward(trueLabel, learningRate, momentum);
                     Console.WriteLine(i);
                 }
-            }
+            
             
         }
 
@@ -220,7 +218,7 @@ namespace CNN.Model
             int testSetSize = cifarSet.testDataLabel.GetLength(0);
 
             //run the tests for each image in the test set
-            for (int i = 0;i < 300 /*testSetSize*/;i++)
+            for (int i = 0;i < 300;i++)
             {
                 // assign input image
                 double[,,] image = new double[3, 32, 32];
@@ -249,8 +247,8 @@ namespace CNN.Model
                 }
             }
 
-            double topOneAccuracy = (double)topOneHit / 300 /*testSetSize*/;
-            double topThreeAccuracy = (double)topThreeHit / 300 /*testSetSize*/;
+            double topOneAccuracy = (double)topOneHit / 300 ;
+            double topThreeAccuracy = (double)topThreeHit / 300 ;
             double[] result = { topOneAccuracy, topThreeAccuracy };
 
             return result;

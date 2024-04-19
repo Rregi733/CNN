@@ -1,12 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more informationž
+﻿// See https://aka.ms/new-console-template for more information
 using System;
 using CNN.DataHandler;
 
- CifarSet cifarSet = new CifarSet("C:\\cifar-100-binary");
-
-for (int i = 0; i < 10; i++)
+class Program
 {
-    Console.WriteLine(cifarSet.coarseLabels[cifarSet.trainDataLabel[i, 0]] + "   " + cifarSet.fineLabels[cifarSet.trainDataLabel[i, 1]]);
+    static void Main(string[] args)
+    {
+
+    }
 }
-
-
